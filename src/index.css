@@ -1,0 +1,18 @@
+body {
+    margin: 10px;
+}
+.webChat {
+    height: calc(100vh - 75px) !important;
+}
+
+.userIdArea {
+    background: #006abc;
+    font-size: 1.3em;
+    padding: 10px;
+    font-family: sans-serif;
+    color: white;
+}
+.userIdArea input {
+    font-size: 1.1em;
+    margin-left: 10px;
+}
