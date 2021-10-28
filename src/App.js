@@ -5,7 +5,7 @@ const storedUserName = sessionStorage.getItem("storedUserName");
 
 const botSecret = "cXeVg9qGnZM.KPeyDLf7nl26Kg1SY1UFCTryjCQTQr6i9Qie_2vcuq8";
 export default () => {
-  const [userId, setUserId] = useState(storedUserName);
+  const [userId, setUserId] = useState(storedUserName && storedUserName.length > 0 ? storedUserName: undefined);
   const [webChatActive, setWebChatActive] = useState(storedUserName && storedUserName.length > 0);
   const directLine = useMemo(() => createDirectLine({ secret: botSecret }), []);
 
