@@ -2,6 +2,10 @@ body {
     margin: 10px;
 }
 
+.webChat {
+    height: calc(100% - 15px) !important;
+}
+
 .userIdArea {
     background: #006abc;
     font-size: 1.3em;

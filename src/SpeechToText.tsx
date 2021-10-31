@@ -8,7 +8,7 @@ const SPEECH_REGION = "westeurope";
 
 export const SpeechToText = () => {
     const [isRecording, setIsRecording] = useState(false);
-    const [hint, setHint] = useState<string>("Bereit...");
+    const [hint, setHint] = useState<string>();
     const [recognizedText, setRecognizedText] = useState<string>();
 
     const sttFromMic = useCallback(() => {
@@ -35,14 +35,16 @@ export const SpeechToText = () => {
 
     return (
         <div className="row" style={{ margin: 0 }}>
-            <div className="col-3" style={{ fontSize: '2.5em' }}>
+            <div className="col-3" style={{ fontSize: '2em', marginTop: '8px' }}>
                 <i className="fas fa-microphone fa-lg mr-2" style={{ color: isRecording ? 'red' : 'green' }} onClick={() => sttFromMic()}></i>
                 {isRecording && <i style={{ marginLeft: '20px' }} className="fas fa-circle-notch fa-spin"></i>}
             </div>
-            <div className="col-9 output-display rounded" style={{ padding: '20px' }}>
-                {hint && <code>{hint}</code>}
-                {recognizedText && <div style={{ color: 'white' }}>{recognizedText}</div>}
-            </div>
+            {(hint || recognizedText) &&
+                <div className="col-9 output-display rounded" style={{ padding: '20px' }}>
+                    {hint && <code>{hint}</code>}
+                    {recognizedText && <div style={{ color: 'white' }}>{recognizedText}</div>}
+                </div>
+            }
         </div>
     );
 }
