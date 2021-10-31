@@ -1,9 +1,6 @@
 body {
     margin: 10px;
 }
-.webChat {
-    height: calc(100vh - 75px) !important;
-}
 
 .userIdArea {
     background: #006abc;
@@ -43,7 +40,6 @@ body {
 
 .output-display {
     background-color: #383b4b;
-    height: 700px;
 }
 
 .fas, .fa {
@@ -53,4 +49,14 @@ body {
 .background {
     background-color: #272727;
     color: #747474;
+}
+
+
+
+/* CHAT */ 
+.webchat__bubble:not(.webchat__bubble--from-user) .webchat__bubble__content {
+    background: #19875445 !important;
+}
+.webchat__bubble--from-user p {
+    background: #9cbef04a;
 }

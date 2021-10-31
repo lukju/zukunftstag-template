@@ -1,6 +1,4 @@
 import React, { useCallback, useState } from 'react';
-
-import { Container } from 'reactstrap';
 import { ResultReason } from 'microsoft-cognitiveservices-speech-sdk';
 
 
@@ -9,45 +7,42 @@ const SPEECH_KEY = "61f98fede878429c970ec31e68c51184";
 const SPEECH_REGION = "westeurope";
 
 export const SpeechToText = () => {
-    const [displayText, setDisplayText] = useState("Bereit...");
     const [isRecording, setIsRecording] = useState(false);
+    const [hint, setHint] = useState<string>("Bereit...");
+    const [recognizedText, setRecognizedText] = useState<string>();
 
     const sttFromMic = useCallback(() => {
-        setIsRecording(true);
-        const speechConfig = speechsdk.SpeechConfig.fromSubscription (SPEECH_KEY, SPEECH_REGION);
+        const speechConfig = speechsdk.SpeechConfig.fromSubscription(SPEECH_KEY, SPEECH_REGION);
         speechConfig.speechRecognitionLanguage = 'de-DE';
-        
+
         const audioConfig = speechsdk.AudioConfig.fromDefaultMicrophoneInput();
         const recognizer = new speechsdk.SpeechRecognizer(speechConfig, audioConfig);
 
-        setDisplayText('Mic ist aktiv...');
+        setIsRecording(true);
+        setRecognizedText("");
+        setHint('Mikrophon ist aktiv...');
 
         recognizer.recognizeOnceAsync((result: any) => {
-            let displayText;
             if (result.reason === ResultReason.RecognizedSpeech) {
-                displayText = `RECOGNIZED: Text=${result.text}`
+                setRecognizedText(result.text);
+                setHint("");
             } else {
-                displayText = 'ERROR: Speech was cancelled or could not be recognized. Ensure your microphone is working properly.';
+                setHint('Die Spracherkennung wurde abgebrochen oder konnte nichts erkennen. Stellen Sie sicher, dass das Mikrophon funktioniert.');
             }
-
             setIsRecording(false);
-            setDisplayText(displayText);
         });
     }, []);
 
     return (
-        <Container className="app-container">
-            <h1 className="display-4 mb-3">Speech sample app</h1>
-
-            <div className="row main-container">
-                <div className="col-6">
-                    <i className="fas fa-microphone fa-lg mr-2" style={{color: isRecording ? 'red': 'green'}} onClick={() => sttFromMic()}></i>
-                    { isRecording && <i className="fas fa-circle-notch fa-spin"></i> }
-                </div>
-                <div className="col-6 output-display rounded">
-                    <code>{displayText}</code>
-                </div>
+        <div className="row" style={{ margin: 0 }}>
+            <div className="col-3" style={{ fontSize: '2.5em' }}>
+                <i className="fas fa-microphone fa-lg mr-2" style={{ color: isRecording ? 'red' : 'green' }} onClick={() => sttFromMic()}></i>
+                {isRecording && <i style={{ marginLeft: '20px' }} className="fas fa-circle-notch fa-spin"></i>}
             </div>
-        </Container>
+            <div className="col-9 output-display rounded" style={{ padding: '20px' }}>
+                {hint && <code>{hint}</code>}
+                {recognizedText && <div style={{ color: 'white' }}>{recognizedText}</div>}
+            </div>
+        </div>
     );
 }
