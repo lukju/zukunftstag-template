@@ -1,16 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import ReactWebChat, { createDirectLine } from 'botframework-webchat';
-import { SpeechToText } from './SpeechToText';
+import { env } from './env';
 
-const botSecret = "cXeVg9qGnZM.KPeyDLf7nl26Kg1SY1UFCTryjCQTQr6i9Qie_2vcuq8";
 export default () => {
   const [height, setHeight] = useState<string>();
-  const [userId] = useState(`user-${new Date().getTime()}`);
-  const directLine = useMemo(() => createDirectLine({ secret: botSecret }), []);
+  const [userId] = useState(`user-${env.owner}-${new Date().getTime()}`);
+  const directLine = useMemo(() => createDirectLine({ secret: env.botSecret }), []);
 
   useEffect(() => {
     const resizeHandler = () => {
-      setHeight(`${window.innerHeight - 84}px`);
+      setHeight(`${window.innerHeight - 90}px`);
     }
     window.addEventListener('resize', resizeHandler);
     resizeHandler();
@@ -20,9 +19,9 @@ export default () => {
   }, []);
 
   return <>
-    <div style={{height: height}}>
-      <SpeechToText></SpeechToText>
-      <ReactWebChat className="webChat" locale="de-DE" directLine={directLine} userID={userId} />
+    <h1 className="p-2 title">Zukunftstag von {env.owner}</h1>
+    <div className="webChat-container" style={{height: height}}>
+      <ReactWebChat  className="webChat" locale="de-DE" directLine={directLine} userID={userId} />
     </div>
   </>;
 };

@@ -1,66 +1,21 @@
 body {
-    margin: 10px;
+    margin: 12px;
 }
 
-.webChat {
-    height: calc(100% - 15px) !important;
-}
-
-.userIdArea {
-    background: #006abc;
-    font-size: 1.3em;
-    padding: 10px;
-    font-family: sans-serif;
+.title {
+    background: #863d3d;
     color: white;
 }
-.userIdArea input {
-    font-size: 1.1em;
-    margin-left: 10px;
+
+.webChat-container {
+    border: 1px solid #863d3d;
 }
-
-
-
-
-/* SpeechToText */
-.main-container {
-    margin-top: 100px;
-}
-
-.fa-microphone {
-    color: #14A76C;
-}
-
-.fa-microphone:hover {
-    color: #0c6e47;
-}
-
-.fa-file-audio {
-    color: #FF652F;
-}
-
-.fa-file-audio:hover {
-    color: #d44916;
-}
-
-.output-display {
-    background-color: #383b4b;
-}
-
-.fas, .fa {
-    cursor: pointer;
-}
-
-.background {
-    background-color: #272727;
-    color: #747474;
-}
-
 
 
 /* CHAT */ 
 .webchat__bubble:not(.webchat__bubble--from-user) .webchat__bubble__content {
-    background: #19875445 !important;
+    background: #8cbea033 !important;
 }
 .webchat__bubble--from-user p {
-    background: #9cbef04a;
+    background: #a9c8f64a;
 }
