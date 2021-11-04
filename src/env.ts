@@ -1,4 +1,9 @@
+function getQueryParam(name: any){
+    name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(window.location.search)
+    return name ? decodeURIComponent(name[1]): undefined;
+ }
+
 export const env = {
-    owner: "Lukas",
-    botSecret: "cXeVg9qGnZM.KPeyDLf7nl26Kg1SY1UFCTryjCQTQr6i9Qie_2vcuq8"
+    owner: getQueryParam("owner") || '<unbekannt>',
+    botSecret: getQueryParam("secret")
 };
