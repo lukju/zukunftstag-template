@@ -1,17 +1,15 @@
 function getQueryParam(name: any) {
-    name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(window.location.search)
+    if (window.location.search) {
+        sessionStorage.setItem("queryParams", window.location.search);
+        location.search = "";
+        location.reload();
+    } 
+    const queryParams = sessionStorage.getItem("queryParams") || '';
+    name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(queryParams)
     return name ? decodeURIComponent(name[1]) : undefined;
-}
-
-let botSecret = getQueryParam("secret");
-if (botSecret) {
-    sessionStorage.setItem("botSecret", botSecret);
-    location.reload();
-} else {
-    botSecret = sessionStorage.getItem("botSecret") || '';
 }
 
 export const env = {
     owner: getQueryParam("owner") || '<unbekannt>',
-    botSecret: botSecret
+    botSecret: getQueryParam("secret")
 };
