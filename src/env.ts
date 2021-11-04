@@ -1,8 +1,7 @@
 function getQueryParam(name: any) {
     if (window.location.search) {
         sessionStorage.setItem("queryParams", window.location.search);
-        location.search = "";
-        location.reload();
+        window.location.href = window.location.href.substring(0, window.location.href.indexOf("?"))
     } 
     const queryParams = sessionStorage.getItem("queryParams") || '';
     name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(queryParams)
