@@ -4,7 +4,7 @@ import { env } from './env';
 
 export default () => {
   const [height, setHeight] = useState<string>();
-  const [userId] = useState(`user-${env.owner}-${new Date().getTime()}`);
+  const [userId] = useState(`u-${new Date().getTime()}`);
   const directLine = useMemo(() => createDirectLine({ secret: env.botSecret }), []);
 
   useEffect(() => {
