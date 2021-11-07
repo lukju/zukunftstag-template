@@ -18,6 +18,8 @@ export default () => {
     }
   }, []);
 
+  console.log("User ID", userId);
+
   return <>
     <h1 className="p-2 title">Zukunftstag von {env.owner}</h1>
     <div className="webChat-container" style={{height: height}}>
