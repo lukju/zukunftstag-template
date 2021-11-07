@@ -24,7 +24,7 @@ export default () => {
     <h1 className="p-2 title">Zukunftstag von {env.owner}</h1>
     <div className="webChat-container" style={{height: height}}>
       { !env.botSecret && <div className="m-2 p-2">Bot-Konfiguration konnte nicht geladen werden</div> }
-      { env.botSecret && <ReactWebChat  className="webChat" locale="de-DE" directLine={directLine} userID={userId} /> }
+      { env.botSecret && <ReactWebChat className="webChat" locale="de-DE" directLine={directLine} userID={userId} /> }
     </div>
   </>;
 };
